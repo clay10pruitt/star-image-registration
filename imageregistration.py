@@ -25,7 +25,7 @@ class ImageRegistrationSet:
     # images to align with reference image
     images = []
 
-    def __init__():
+    def __init__(self):
         pass
 
     """
@@ -95,14 +95,30 @@ def main():
     #TODO: Should be able to read images from all subdirectories in the given directory.
 
     # get all the images from the directory
-    image_set = 
+
+    image_set = ImageRegistrationSet()
+
     valid_extensions = [".jpg"]
+
     file_path, files_in_path = __parse_input(sys.argv)
-    for file_name in files_in_path:
-        file_extension = os.path.splitext(file_name)[1].lower()
+
+    for file in files_in_path:
+
+        # get file name (without extension) and file extension
+        file_name = os.path.splitext(file)[0].lower()
+        file_extension = os.path.splitext(file)[1].lower()
+
+        # only add image if it contains a valid extension
         if file_extension in valid_extensions:
-            image = cv2.imread(file_path + file_name)
-            images.append(image)
+
+            # read the image into OpenCV2
+            image = cv2.imread(file_path + file)
+
+            # determine where to sort the image
+            if file_name == "reference":
+                image_set.set_reference(image)
+            else:
+                image_set.add_image(image)
 
 
 if __name__ == "__main__":
