@@ -27,15 +27,23 @@ class Image:
     # grayscaled version of image
     __grayscale = None
 
+    # size info
+    __height = 0
+    __width = 0
+
 
     """
     Constructor. Initializes this Image object with a colored and grayscaled version of the same image.
     @param color: image with color
     @param grayscale: image with grayscale
+    @param height: height of image
+    @param width: width of image
     """
-    def __init__(self, color, grayscale):
+    def __init__(self, color, grayscale, height, width):
         self.__color = color
         self.__grayscale = grayscale
+        self.__height = height
+        self.__width = width
 
 
     """
@@ -52,6 +60,22 @@ class Image:
     """
     def get_grayscaled(self):
         return self.__grayscaled
+
+
+    """
+    Getter for image's height.
+    @return: height of image
+    """
+    def get_height(self):
+        return self.__height
+
+
+    """
+    Getter for image's width.
+    @return: width of image
+    """
+    def get_width(self):
+        return self.__width
     
 
 class ImageRegistrationSet:
@@ -160,7 +184,10 @@ def main():
         if file_extension in valid_extensions:
 
             # read the image into OpenCV2
-            image = cv2.imread(file_path + file)
+            image_colored = cv2.imread(file_path + file)
+            image_grayscaled = cv2.cvtColor(image_colord, cv2.COLOR_BGR2GRAY)
+            height, width = image_colored.shape
+            image = Image(image_colored, image_grayscaled, height, width)
 
             # determine where to sort the image
             if file_name == "reference":
