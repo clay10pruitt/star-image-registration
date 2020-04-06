@@ -12,6 +12,51 @@ import os, os.path
 import sys
 
 
+##################################
+# CLASSES
+##################################
+
+
+class ImageRegistrationSet:
+
+    # reference image for this set
+    reference = None
+
+    # images to align with reference image
+    images = []
+
+    def __init__():
+        pass
+
+    """
+    Sets reference image.
+    @param ref: reference image to set with
+    """
+    def set_reference(self, ref):
+        self.reference = ref
+
+
+    """
+    Gets reference image.
+    @return: reference image
+    """
+    def get_reference(sef):
+        return self.reference
+
+
+    """
+    Adds a new image to the set of images.
+    @param image: new image to add
+    """
+    def add_image(self, image):
+        self.images.append(image)
+
+
+##################################
+# METHODS
+##################################
+
+
 """
 Helper method for main(). Returns a file_path and all files in the path.
 @param argv: arguments from command line
@@ -50,17 +95,14 @@ def main():
     #TODO: Should be able to read images from all subdirectories in the given directory.
 
     # get all the images from the directory
-    images = []
+    image_set = 
     valid_extensions = [".jpg"]
     file_path, files_in_path = __parse_input(sys.argv)
     for file_name in files_in_path:
         file_extension = os.path.splitext(file_name)[1].lower()
         if file_extension in valid_extensions:
-            print("file_name: " + file_path + file_name)
             image = cv2.imread(file_path + file_name)
             images.append(image)
-
-    print("Found following files: " + str(images))
 
 
 if __name__ == "__main__":
