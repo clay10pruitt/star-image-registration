@@ -16,14 +16,54 @@ import sys
 # CLASSES
 ##################################
 
+class Image:
+    """
+    A single object that holds a colored and grayscale version of a single image.
+    """
+
+    # colored version of image
+    __color = None
+
+    # grayscaled version of image
+    __grayscale = None
+
+
+    """
+    Constructor. Initializes this Image object with a colored and grayscaled version of the same image.
+    @param color: image with color
+    @param grayscale: image with grayscale
+    """
+    def __init__(self, color, grayscale):
+        self.__color = color
+        self.__grayscale = grayscale
+
+
+    """
+    Getter for the colored image.
+    @return: the colored image
+    """
+    def get_colored(self):
+        return self.__color
+
+
+    """
+    Getter for the grayscaled image.
+    @return: the grayscaled imaeg
+    """
+    def get_grayscaled(self):
+        return self.__grayscaled
+    
 
 class ImageRegistrationSet:
+    """
+    A set of images to be registered against some reference image.
+    """
 
     # reference image for this set
-    reference = None
+    __reference = None
 
     # images to align with reference image
-    images = []
+    __images = []
 
     def __init__(self):
         pass
@@ -33,7 +73,7 @@ class ImageRegistrationSet:
     @param ref: reference image to set with
     """
     def set_reference(self, ref):
-        self.reference = ref
+        self.__reference = ref
 
 
     """
@@ -41,7 +81,7 @@ class ImageRegistrationSet:
     @return: reference image
     """
     def get_reference(self):
-        return self.reference
+        return self.__reference
 
 
     """
@@ -49,7 +89,7 @@ class ImageRegistrationSet:
     @param image: new image to add
     """
     def add_image(self, image):
-        self.images.append(image)
+        self.__images.append(image)
 
 
 
@@ -58,7 +98,7 @@ class ImageRegistrationSet:
     @return: images
     """
     def get_images(self):
-        return self.images
+        return self.__images
 
 ##################################
 # METHODS
@@ -129,5 +169,6 @@ def main():
                 image_set.add_image(image)
 
 
+    
 if __name__ == "__main__":
     main()
