@@ -16,9 +16,9 @@ import sys
 # CLASSES
 ##################################
 
-class Image:
+class ImageData:
     """
-    A single object that holds a colored and grayscale version of a single image.
+    An assortment of data for an image.
     """
 
     # colored version of image
@@ -30,6 +30,10 @@ class Image:
     # size info
     __height = 0
     __width = 0
+
+    # keypoints and descriptors
+    __keypoints = None
+    __descriptors = None
 
 
     """
@@ -44,6 +48,22 @@ class Image:
         self.__grayscale = grayscale
         self.__height = height
         self.__width = width
+
+
+    """
+    Setter for keypoints.
+    @param keypoints: keypoints
+    """
+    def set_keypoints(self, keypoints):
+        self.__keypoints = keypoints
+
+
+    """
+    Setter for descriptors.
+    @param descriptors: descriptors
+    """
+    def set_descriptors(self, descriptors):
+        self.__descriptors = descriptors
 
 
     """
@@ -124,6 +144,7 @@ class ImageRegistrationSet:
     def get_images(self):
         return self.__images
 
+
 ##################################
 # METHODS
 ##################################
@@ -187,15 +208,14 @@ def main():
             image_colored = cv2.imread(file_path + file)
             image_grayscaled = cv2.cvtColor(image_colord, cv2.COLOR_BGR2GRAY)
             height, width = image_colored.shape
-            image = Image(image_colored, image_grayscaled, height, width)
+            image = ImageData(image_colored, image_grayscaled, height, width)
 
             # determine where to sort the image
             if file_name == "reference":
                 image_set.set_reference(image)
             else:
                 image_set.add_image(image)
-
-
-    
+        
+        
 if __name__ == "__main__":
     main()
