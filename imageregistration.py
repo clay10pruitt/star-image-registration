@@ -40,7 +40,7 @@ class ImageRegistrationSet:
     Gets reference image.
     @return: reference image
     """
-    def get_reference(sef):
+    def get_reference(self):
         return self.reference
 
 
@@ -51,6 +51,14 @@ class ImageRegistrationSet:
     def add_image(self, image):
         self.images.append(image)
 
+
+
+    """
+    Gets images to be aligned.
+    @return: images
+    """
+    def get_images(self):
+        return self.images
 
 ##################################
 # METHODS
