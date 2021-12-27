@@ -1,2 +1,2 @@
-# phys689-trajectories
-PHYS.689.01 Project Repository for Trajectories Team
+# Star Image Registration
+Simple Python script using the astroalign package to align images of stars.
